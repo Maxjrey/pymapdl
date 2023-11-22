@@ -18,6 +18,7 @@ docker run \
     --oom-kill-disable \
     --memory=6656MB  \
     --memory-swap=16896MB \
-    --entrypoint "/bin/bash -c 'sudo yum update && sudo yum install -y libgomp && /ansys_inc/ansys/bin/mapdl -grpc -$DISTRIBUTED_MODE -np 2 '"
-    $MAPDL_IMAGE > log.txt &
+    --entrypoint "/bin/bash -c 'sudo yum update && sudo yum install -y libgomp && /ansys_inc/ansys/bin/mapdl -grpc'"
+    $MAPDL_IMAGE \
+    -$DISTRIBUTED_MODE -np 2  > log.txt &
 grep -q 'Server listening on' <(timeout 60 tail -f log.txt)
