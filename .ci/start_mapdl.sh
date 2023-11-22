@@ -19,5 +19,5 @@ docker run \
     --memory=6656MB  \
     --memory-swap=16896MB \
     --entrypoint "/bin/bash" \
-    $MAPDL_IMAGE  -c "echo 'Installing dependencies' && yum update -y && yum install -y libgomp && echo 'Launching MAPDL' && /ansys_inc/ansys/bin/mapdl -grpc -$DISTRIBUTED_MODE -np 2 " > log.txt &
+    $MAPDL_IMAGE  -c "echo 'Installing dependencies' && yum update -y && yum install -y libgomp && echo 'Launching MAPDL' && /ansys_inc/ansys/bin/mapdl -grpc" > log.txt &
 grep -q 'Server listening on' <(timeout 60 tail -f log.txt)
